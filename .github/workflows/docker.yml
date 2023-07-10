@@ -7,7 +7,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  OWNER_NAME: ${{ github.repository_owner }}
 
 jobs:
   build:
@@ -29,6 +28,12 @@ jobs:
             file: Dockerfile.cockroach
 
     steps:
+      - name: set lower case owner name
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+
       - name: Checkout
         uses: actions/checkout@v3.5.3
         with:
@@ -49,7 +54,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.6.0
         with:
-          images: ${{ env.REGISTRY }}/${{ env.OWNER_NAME }}/${{ matrix.name }}
+          images: ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ matrix.name }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -66,7 +71,7 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ${{ env.REGISTRY }}/${{ env.OWNER_NAME }}/${{ matrix.name }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ matrix.name }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Image digest
