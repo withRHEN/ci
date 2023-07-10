@@ -67,7 +67,7 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.name }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ matrix.name }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Image digest
