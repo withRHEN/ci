@@ -9,7 +9,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
+  docker:
     name: Build
     # We need to make sure both the Dockerfile and the branch is main
     if: ${{ github.ref == 'refs/heads/main' }}
