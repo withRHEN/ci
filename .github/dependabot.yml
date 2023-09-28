@@ -16,7 +16,7 @@ updates:
       prefix: fix
       prefix-development: chore
       include: scope
-    target-branch: "main"
+    target-branch: "next"
     labels:
       - "dependencies"
 
@@ -33,6 +33,6 @@ updates:
       prefix: fix
       prefix-development: chore
       include: scope
-    target-branch: "main"
+    target-branch: "next"
     labels:
       - "dependencies"
