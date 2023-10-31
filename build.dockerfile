@@ -72,7 +72,7 @@ RUN apt-get update && \
 RUN npm install -g pnpm
 
 # Install Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain={$RUST_VERSION}
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain=$RUST_VERSION
 
 # Install Rust tools
 RUN rustup update && \
