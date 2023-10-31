@@ -21,9 +21,9 @@ jobs:
       matrix:
         include:
           - name: build
-            file: build.fockerfile
+            file: build.dockerfile
           - name: migrator
-            file: migrator.fockerfile
+            file: migrator.dockerfile
           - name: cockroach
             file: cockroach.dockerfile
 
