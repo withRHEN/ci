@@ -8,7 +8,7 @@ ENV CARGO_HOME=/usr/local/cargo \
     RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:/usr/local/yarn/bin:$PATH
 
-ARG RUST_VERSION=1.71.1
+ARG RUST_VERSION=1.72.0
 ARG PROTO_VERSION=24.4
 ARG WASM_VERSION=116
 
