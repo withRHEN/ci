@@ -21,11 +21,11 @@ jobs:
       matrix:
         include:
           - name: build
-            file: Dockerfile.build
+            file: build.fockerfile
           - name: migrator
-            file: Dockerfile.migrator
+            file: migrator.fockerfile
           - name: cockroach
-            file: Dockerfile.cockroach
+            file: cockroach.dockerfile
 
     steps:
       - name: set lower case owner name
