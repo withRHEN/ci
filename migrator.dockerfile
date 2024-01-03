@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.description="Migrator for RHEN"
 RUN apk add --no-cache musl-dev openssl-dev perl make && \
     cargo install --git https://github.com/launchbadge/sqlx sqlx-cli --features openssl-vendored
 
-FROM alpine:3.18.5
+FROM alpine:3.19.0
 
 COPY --from=builder /usr/local/cargo/bin/sqlx /usr/local/bin/sqlx
 
