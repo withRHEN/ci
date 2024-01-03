@@ -1,4 +1,4 @@
-FROM rust:1.74.0-alpine3.18 as builder
+FROM rust:1.75.0-alpine3.18 as builder
 
 LABEL org.opencontainers.image.source=https://github.com/withRHEN/ci
 LABEL org.opencontainers.image.description="Migrator for RHEN"
