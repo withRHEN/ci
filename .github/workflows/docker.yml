@@ -52,7 +52,7 @@ jobs:
       # https://github.com/docker/metadata-action
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v5.3.0
+        uses: docker/metadata-action@v5.4.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ matrix.name }}
 
