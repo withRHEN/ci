@@ -88,16 +88,3 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-
-  notification:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4.1.1
-
-      - name: Discord notification
-        uses: bythope/discord-webhook-messages@v1.1.0
-        with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          handler: 'push'
