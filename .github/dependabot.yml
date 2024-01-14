@@ -22,7 +22,7 @@ updates:
 
   # Maintain dependencies for docker
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "/docker"
     schedule:
       interval: "daily"
     reviewers:

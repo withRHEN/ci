@@ -2,8 +2,13 @@ name: Docker Build
 
 on:
   workflow_dispatch:
-  release:
-    types: [ published ]
+  schedule:
+    # Run every day at midnight
+    - cron: '0 0 * * *'
+  push:
+    paths:
+      - docker/**/*
+      - .github/workflows/docker.yml
 
 env:
   REGISTRY: ghcr.io
@@ -11,7 +16,11 @@ env:
 jobs:
   build:
     name: Build
+    # We need to make sure both the Dockerfile and the branch is main
+    if: ${{ github.ref == 'refs/heads/main' }}
+
     runs-on: ubuntu-latest
+
     permissions:
       actions: write
       contents: read
@@ -21,11 +30,15 @@ jobs:
       matrix:
         include:
           - name: build
-            file: build.dockerfile
-          - name: migrator
-            file: migrator.dockerfile
+            file: docker/build.dockerfile
           - name: cockroach
-            file: cockroach.dockerfile
+            file: docker/cockroach.dockerfile
+          - name: minio
+            file: docker/minio.dockerfile
+          - name: nats
+            file: docker/nats.dockerfile
+          - name: redis
+            file: docker/redis.dockerfile
 
     steps:
       - name: set lower case owner name
@@ -71,8 +84,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ matrix.name }}:${{ github.sha }}
-            ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ matrix.name }}:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -88,4 +100,4 @@ jobs:
         uses: bythope/discord-webhook-messages@v1.1.0
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          handler: 'release'
+          handler: 'push'
