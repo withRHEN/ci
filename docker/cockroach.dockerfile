@@ -1,4 +1,4 @@
-FROM cockroachdb/cockroach:v23.1.14
+FROM cockroachdb/cockroach:v23.2.0
 
 COPY docker/entrypoint.sh /rhen-entrypoint.sh
 
