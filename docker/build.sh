@@ -31,7 +31,7 @@ apt-get install -y --no-install-recommends \
 
 # Install all external libraries
 git clone https://github.com/withRHEN/external.git --depth 1 --recurse-submodule --shallow-submodules /tmp/external
-/tmp/external/build.sh --prefix /usr/local --build "all ffmpeg+tls"
+/tmp/external/build.sh --prefix /usr/local --build "protonbuf"
 ldconfig
 rm -rf /tmp/external
 
